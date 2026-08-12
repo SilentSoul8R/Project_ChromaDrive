@@ -1,0 +1,221 @@
+/* ============================================================
+   ARENA THEME — reusable stylesheet
+   ------------------------------------------------------------
+   HOW TO USE:
+   1. Save this file as "arena-theme.css" next to your HTML file.
+   2. Link it in your <head>:
+        <link rel="stylesheet" href="arena-theme.css">
+   3. Add <div class="crt"></div> as the very first thing inside
+      <body> — this is what draws the scanline/vignette overlay.
+      (The other four themes don't need this step.)
+   4. Use the class names below on your own elements (see the
+      cheat-sheet at the bottom of this file).
+   5. To retheme later, you only need to edit the values inside
+      :root { } — every color in this file is a variable, so
+      changing one line updates the whole page.
+
+   Uses the exact same class names as oblivion-theme.css /
+   skyrim-theme.css / morrowind-theme.css / daggerfall-theme.css,
+   so you can swap between all five templates just by changing
+   the <link> href (plus the one extra .crt div above).
+
+   Note: this theme is deliberately retro/CRT, so a couple of
+   properties (letter-spacing, box borders, text-transform)
+   behave a bit differently to sell the "old terminal" look —
+   that's intentional, not a bug.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+:root{
+    --bg:       #050805;
+    --green:    #33FF66;
+    --green-dim:#1FA845;
+    --amber:    #FFB000;
+    --panel:    #0A100A;
+
+    --font-display: "Press Start 2P", monospace;
+    --font-body:    "VT323", monospace;
+    --font-mono:    "VT323", monospace;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--green);
+    font-family: var(--font-body);
+    font-size: 22px;
+    line-height: 1.5;
+    background-image: repeating-linear-gradient(0deg, rgba(51,255,102,0.04) 0px, transparent 1px, transparent 3px);
+}
+
+/* CRT vignette overlay — add <div class="crt"></div> as the
+   first element inside <body> to get the scanline/vignette look */
+.crt{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.55) 100%);
+    z-index: 2;
+}
+
+.wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 20px 90px;
+    position: relative;
+    z-index: 1;
+}
+
+.book{
+    border: 2px solid var(--green);
+    padding: 26px 24px;
+    background: var(--panel);
+}
+
+h1, h2, h3{
+    font-family: var(--font-display);
+    color: var(--green);
+    text-transform: uppercase;
+}
+
+h1{ font-size: clamp(13px, 2.6vw, 18px); line-height: 1.8; margin: 0 0 18px; }
+h2{ font-size: clamp(12px, 2.2vw, 15px); line-height: 1.8; margin: 0 0 18px; }
+h3{ font-size: 13px; color: var(--amber); margin: 0 0 18px; }
+h3::before{ content: "### "; color: var(--green-dim); }
+
+p{ margin: 0 0 14px; color: var(--green); }
+p:last-child{ margin-bottom: 0; }
+p b, p strong{ color: var(--amber); }
+
+a{ color: var(--green); }
+a:hover{ color: var(--amber); }
+
+.kicker{
+    font-family: var(--font-display);
+    font-size: 9px;
+    color: var(--amber);
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+}
+
+.byline{ font-size: 16px; color: var(--green-dim); }
+.byline address{ display: inline; font-style: normal; color: var(--amber); }
+
+/* A row of dashes instead of ornamental glyphs — fits the terminal look */
+.divider{
+    border-top: 1px dashed var(--green-dim);
+    margin: 20px 0;
+}
+
+nav.toc{
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin: 26px 0 30px;
+    border-top: 1px dashed var(--green-dim);
+    border-bottom: 1px dashed var(--green-dim);
+    padding: 10px 0;
+}
+nav.toc a{
+    font-size: 17px;
+    color: var(--green);
+    text-decoration: none;
+    padding: 4px 14px;
+}
+nav.toc a::before{ content: "> "; color: var(--amber); }
+nav.toc a:hover, nav.toc a:focus-visible{ background: var(--green); color: var(--bg); outline: none; }
+
+.panel, section{
+    border: 1px solid var(--green-dim);
+    padding: 22px 24px;
+    margin-bottom: 20px;
+    background: var(--panel);
+}
+
+.pullquote{ border-left: 3px solid var(--amber); padding-left: 16px; margin-top: 16px; color: var(--amber); }
+.pullquote b{ display: block; font-size: 14px; color: var(--green-dim); margin-bottom: 6px; }
+.pullquote b::before{ content: "[ "; }
+.pullquote b::after{ content: " ]"; }
+
+.lead-in{ font-size: 16px; color: var(--green-dim); margin-bottom: 10px; }
+.lead-in::before{ content: "> "; }
+
+ul.theme-list{ list-style: none; margin: 0; padding: 0; }
+ul.theme-list li{ padding: 4px 0; color: var(--green); }
+ul.theme-list li::before{ content: "[x] "; color: var(--amber); }
+
+.table-wrap{ overflow-x: auto; }
+
+table{ width: 100%; border-collapse: collapse; font-size: 16px; border: 1px solid var(--green-dim); }
+th{ text-align: left; color: var(--bg); background: var(--green); padding: 8px 12px; font-size: 15px; }
+td{ padding: 8px 12px; border-bottom: 1px dashed var(--green-dim); color: var(--green); }
+td:first-child{ color: var(--amber); }
+
+label{ font-size: 17px; color: var(--green); }
+input[type="text"], input[type="email"], input[type="password"],
+input, textarea, select{
+    font-family: var(--font-body);
+    font-size: 18px;
+    background: var(--bg);
+    border: 1px solid var(--green-dim);
+    color: var(--green);
+    padding: 6px 10px;
+    margin: 4px 10px 4px 4px;
+}
+input:focus, textarea:focus, select:focus{
+    outline: 2px solid var(--amber);
+    outline-offset: 1px;
+}
+input[type="radio"], input[type="checkbox"]{ accent-color: var(--green); }
+
+button, input[type="submit"]{
+    font-family: var(--font-display);
+    font-size: 12px;
+    text-transform: uppercase;
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+button:hover, input[type="submit"]:hover{ background: var(--amber); }
+
+footer{ text-align: center; padding-top: 10px; font-size: 15px; color: var(--green-dim); }
+footer .name{ color: var(--amber); }
+
+/* Blinking terminal cursor — add <span class="cursor"></span>
+   right after any bit of text you want to look "typed" */
+.cursor{
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: var(--green);
+    animation: blink 1s steps(1) infinite;
+    vertical-align: middle;
+}
+@keyframes blink{ 50%{ opacity: 0; } }
+
+
+/* ============================================================
+   CLASS CHEAT-SHEET
+   ------------------------------------------------------------
+   .crt             CRT overlay            put <div class="crt"></div>
+                                            first inside <body> (whole-page effect)
+   .wrap            centered column        wrap your whole page
+   .book            bordered terminal box  wrap .wrap content for the framed look
+   .kicker          small caps label       above a title
+   .divider         dashed line            <div class="divider"></div>
+   .byline          meta info row          author / date / etc
+   nav.toc          "> link" style nav     table of contents links
+   .panel / section bordered content block use for each page section
+   .pullquote       bracketed callout      quotes, notes
+   .lead-in         "> label" style        above a list
+   ul.theme-list    "[x] item" list
+   .cursor          blinking cursor        <span class="cursor"></span> after text
+   table / th / td  already themed         just use normal <table> markup
+   form inputs      already themed         just use normal <input>, <label>, etc
+   ============================================================ */

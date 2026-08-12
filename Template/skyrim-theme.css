@@ -1,0 +1,294 @@
+/* ============================================================
+   SKYRIM THEME — reusable stylesheet
+   ------------------------------------------------------------
+   HOW TO USE:
+   1. Save this file as "skyrim-theme.css" next to your HTML file.
+   2. Link it in your <head>:
+        <link rel="stylesheet" href="skyrim-theme.css">
+   3. Use the class names below on your own elements (see the
+      cheat-sheet at the bottom of this file).
+   4. To retheme later, you only need to edit the values inside
+      :root { } — every color in this file is a variable, so
+      changing one line updates the whole page.
+
+   Uses the exact same class names as oblivion-theme.css /
+   morrowind-theme.css / daggerfall-theme.css / arena-theme.css,
+   so you can swap between all five templates just by changing
+   the <link> href — no HTML changes needed.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Spectral:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono&display=swap');
+
+:root{
+    --stone:        #20262B;
+    --stone-dark:   #151A1E;
+    --ice:          #8FB6C9;
+    --ice-bright:   #C9E4EF;
+    --frost:        #EAF3F6;
+    --steel:        #3E4A56;
+    --gold:         #B08D2E;
+    --gold-bright:  #D4B45A;
+
+    --font-display: "Cinzel", serif;
+    --font-body:    "Spectral", serif;
+    --font-mono:    "JetBrains Mono", monospace;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+    margin: 0;
+    background: linear-gradient(180deg, #0F1416 0%, var(--stone-dark) 100%);
+    color: var(--frost);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.75;
+}
+
+.wrap{
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 24px 20px 90px;
+}
+
+/* Frosty framed panel — equivalent of Oblivion's .book */
+.book{
+    background: var(--stone);
+    border: 1px solid var(--steel);
+    box-shadow: 0 0 0 1px var(--steel), 0 20px 50px rgba(0,0,0,0.5);
+    padding: 48px 44px;
+    position: relative;
+}
+.book::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--ice-bright), var(--gold));
+    opacity: 0.6;
+}
+
+@media (max-width: 560px){
+    .book{ padding: 32px 20px; }
+}
+
+h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--frost);
+    text-shadow: 0 0 30px rgba(143,182,201,0.3);
+}
+
+h1{ font-size: clamp(28px, 5vw, 42px); line-height: 1.2; margin: 0 0 24px; }
+h2{ font-size: clamp(22px, 3.8vw, 28px); margin: 0 0 20px; }
+h3{ font-size: 22px; color: var(--gold-bright); margin: 0 0 18px; text-transform: uppercase; }
+
+p{ margin: 0 0 16px; color: #B8C4CC; }
+p:last-child{ margin-bottom: 0; }
+p b, p strong{ color: var(--frost); }
+
+a{ color: var(--ice-bright); }
+a:hover{ color: var(--gold-bright); }
+
+.kicker{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ice);
+    margin-bottom: 22px;
+}
+
+.byline{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ice);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.byline .dot{ color: var(--steel); }
+
+/* Dragon-rune-ish glyph row */
+.divider{
+    text-align: center;
+    color: var(--gold-bright);
+    font-size: 16px;
+    letter-spacing: 0.6em;
+    margin: 0 0 30px;
+    opacity: 0.8;
+}
+
+nav.toc{
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    flex-wrap: wrap;
+    margin: 36px 0 44px;
+}
+nav.toc a{
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--frost);
+    background: var(--stone);
+    border: 1px solid var(--steel);
+    padding: 10px 20px;
+    transition: all 0.15s ease;
+}
+nav.toc a:hover, nav.toc a:focus-visible{
+    background: var(--ice);
+    color: var(--stone-dark);
+    border-color: var(--ice-bright);
+    outline: none;
+}
+
+.panel, section{
+    background: var(--stone);
+    border: 1px solid var(--steel);
+    padding: 34px 38px;
+    margin-bottom: 26px;
+    position: relative;
+}
+.panel::before, section::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--ice-bright), var(--gold));
+    opacity: 0.6;
+}
+
+.pullquote{
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ice-bright);
+    border-left: 3px solid var(--ice);
+    padding-left: 18px;
+    margin-top: 20px;
+}
+.pullquote b{
+    display: block;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 8px;
+}
+
+.lead-in{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ice);
+    margin-bottom: 12px;
+}
+
+ul.theme-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+}
+ul.theme-list li{ position: relative; padding-left: 24px; color: var(--frost); }
+ul.theme-list li::before{
+    content: "\2744"; /* snowflake — swap for any unicode symbol */
+    position: absolute;
+    left: 0;
+    color: var(--ice-bright);
+    font-size: 13px;
+}
+
+.table-wrap{ overflow-x: auto; }
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15.5px;
+    border: 1px solid var(--steel);
+}
+th{
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--stone-dark);
+    background: var(--ice-bright);
+    padding: 12px 16px;
+}
+td{ padding: 12px 16px; border-bottom: 1px solid var(--steel); color: #B8C4CC; }
+tr:nth-child(even) td{ background: rgba(143,182,201,0.05); }
+td:first-child{ color: var(--ice-bright); font-weight: 500; }
+
+label{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--frost);
+}
+input[type="text"], input[type="email"], input[type="password"],
+input, textarea, select{
+    font-family: var(--font-body);
+    font-size: 16px;
+    background: rgba(234,243,246,0.06);
+    border: 1px solid var(--steel);
+    color: var(--frost);
+    padding: 8px 12px;
+    margin: 4px 10px 4px 4px;
+}
+input:focus, textarea:focus, select:focus{
+    outline: 2px solid var(--ice-bright);
+    outline-offset: 1px;
+}
+input[type="radio"], input[type="checkbox"]{ accent-color: var(--ice); }
+
+button, input[type="submit"]{
+    font-family: var(--font-display);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--ice);
+    color: var(--stone-dark);
+    border: none;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+button:hover, input[type="submit"]:hover{ background: var(--ice-bright); }
+
+footer{ text-align: center; padding-top: 16px; }
+footer p{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ice);
+}
+footer .name{ color: var(--gold-bright); }
+
+
+/* ============================================================
+   CLASS CHEAT-SHEET
+   ------------------------------------------------------------
+   .wrap            centered column        wrap your whole page
+   .book            bordered frost panel   wrap .wrap content for the framed look
+   .kicker          small caps label       above a title
+   .divider         glyph row              decorative break
+   .byline          meta info row          author / date / etc
+   nav.toc          tab-style nav links    table of contents links
+   .panel / section bordered content block use for each page section
+   .pullquote       italic callout         quotes, notes
+   .lead-in         small caps label       above a list
+   ul.theme-list    snowflake-bulleted list
+   table / th / td  already themed         just use normal <table> markup
+   form inputs      already themed         just use normal <input>, <label>, etc
+   ============================================================ */
