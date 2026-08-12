@@ -1,0 +1,328 @@
+/* ============================================================
+   OBLIVION THEME — reusable stylesheet
+   ------------------------------------------------------------
+   HOW TO USE:
+   1. Save this file as "oblivion-theme.css" next to your HTML file.
+   2. Link it in your <head>:
+        <link rel="stylesheet" href="oblivion-theme.css">
+   3. Use the class names below on your own elements (see the
+      cheat-sheet at the bottom of this file).
+   4. To retheme later, you only need to edit the values inside
+      :root { } — every color in this file is a variable, so
+      changing one line updates the whole page.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500&family=JetBrains+Mono&display=swap');
+
+:root{
+    --leather:       #4A1414;
+    --leather-dark:  #2E0C0C;
+    --gold:          #C9A227;
+    --gold-bright:   #E8C468;
+    --parchment:     #F0E1B0;
+
+    --font-display: "Cinzel Decorative", serif;
+    --font-body:    "Cormorant Garamond", serif;
+    --font-mono:    "JetBrains Mono", monospace;
+}
+
+/* ---------- base page ---------- */
+
+*{ box-sizing: border-box; }
+
+body{
+    margin: 0;
+    background: radial-gradient(ellipse at top, #5C1F1F, var(--leather-dark) 75%);
+    color: var(--parchment);
+    font-family: var(--font-body);
+    font-size: 19px;
+    line-height: 1.75;
+}
+
+/* Wrap your whole page content in <div class="wrap"> to get
+   the centered, readable-width column. */
+.wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 24px 20px 90px;
+}
+
+/* Wrap that in <div class="book"> as well for the full "ancient
+   tome" look — gold border with a nested drop-shadow border. */
+.book{
+    background: var(--leather);
+    border: 2px solid var(--gold);
+    box-shadow:
+        0 0 0 6px var(--leather-dark),
+        0 0 0 8px var(--gold),
+        0 20px 50px rgba(0,0,0,0.5);
+    padding: 56px 50px;
+}
+
+@media (max-width: 560px){
+    .book{ padding: 36px 22px; }
+}
+
+/* ---------- headings ---------- */
+
+h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--gold-bright);
+    text-shadow: 0 0 26px rgba(232,196,104,0.3);
+}
+
+h1{ font-size: clamp(24px, 4.2vw, 34px); line-height: 1.3; margin: 0 0 22px; }
+h2{ font-size: clamp(20px, 3.4vw, 26px); margin: 0 0 20px; }
+h3{ font-size: 19px; margin: 0 0 18px; }
+
+p{ margin: 0 0 16px; color: var(--parchment); opacity: 0.92; }
+p:last-child{ margin-bottom: 0; }
+p b, p strong{ color: var(--gold-bright); }
+
+a{ color: var(--gold-bright); }
+a:hover{ color: var(--gold); }
+
+/* ---------- small utility text ---------- */
+
+/* A small uppercase label, e.g. above a title or a section.
+   <div class="kicker">A Chronicle of Cyrodiil</div> */
+.kicker{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 20px;
+}
+
+/* A row of small caps meta info, e.g. byline / date / read time.
+   <div class="byline">
+       <span>By You</span> <span class="dot">&diams;</span> <span>Date</span>
+   </div> */
+.byline{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    opacity: 0.85;
+}
+.byline .dot{ color: var(--gold); }
+
+/* A row of ornamental glyphs, e.g. between header and content.
+   <div class="divider">&#10022; &#10022; &#10022;</div> */
+.divider{
+    text-align: center;
+    color: var(--gold);
+    font-size: 18px;
+    letter-spacing: 0.5em;
+    margin: 0 0 26px;
+}
+
+/* ---------- navigation ---------- */
+
+/* A row of pill/tab style links.
+   <nav class="toc">
+       <a href="#one">One</a>
+       <a href="#two">Two</a>
+   </nav> */
+nav.toc{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 34px 0 44px;
+}
+nav.toc a{
+    font-family: var(--font-display);
+    font-size: 11px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--parchment);
+    border: 1px solid var(--gold);
+    padding: 10px 18px;
+    transition: all 0.15s ease;
+}
+nav.toc a:hover, nav.toc a:focus-visible{
+    background: var(--gold);
+    color: var(--leather-dark);
+    outline: none;
+}
+
+/* ---------- content panels ---------- */
+
+/* A bordered content block. Use this to wrap each section
+   of your page. <section class="panel"> ... </section> */
+.panel, section{
+    background: rgba(240,225,176,0.05);
+    border: 1px solid rgba(201,162,39,0.4);
+    padding: 32px 34px;
+    margin-bottom: 26px;
+}
+
+/* An italic callout / quote block.
+   <div class="pullquote">
+       <b>Label</b>
+       Quote text goes here.
+   </div> */
+.pullquote{
+    font-style: italic;
+    font-size: 19px;
+    color: var(--gold-bright);
+    border-left: 3px solid var(--gold);
+    padding-left: 18px;
+    margin-top: 20px;
+}
+.pullquote b{
+    display: block;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+/* Small uppercase label that sits above a list.
+   <div class="lead-in">Section Label</div> */
+.lead-in{
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 12px;
+}
+
+/* ---------- lists ---------- */
+
+/* A bulletless list with a gold glyph marker.
+   <ul class="theme-list"><li>Item</li></ul> */
+ul.theme-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 9px;
+}
+ul.theme-list li{
+    position: relative;
+    padding-left: 24px;
+}
+ul.theme-list li::before{
+    content: "\2694"; /* crossed swords glyph — swap for any unicode symbol */
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 13px;
+}
+
+/* ---------- tables ---------- */
+
+.table-wrap{ overflow-x: auto; }
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15.5px;
+    border: 1px solid rgba(201,162,39,0.4);
+}
+th{
+    font-family: var(--font-display);
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--leather-dark);
+    background: var(--gold-bright);
+    padding: 12px 16px;
+}
+td{
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(201,162,39,0.25);
+    opacity: 0.9;
+}
+tr:nth-child(even) td{ background: rgba(201,162,39,0.06); }
+td:first-child{ color: var(--gold-bright); font-weight: 600; }
+
+/* ---------- forms ---------- */
+
+/* Themed inputs, so your sign-up forms match the rest of the page. */
+label{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--parchment);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input,
+textarea,
+select{
+    font-family: var(--font-body);
+    font-size: 16px;
+    background: rgba(240,225,176,0.08);
+    border: 1px solid var(--gold);
+    color: var(--parchment);
+    padding: 8px 12px;
+    margin: 4px 10px 4px 4px;
+}
+input:focus, textarea:focus, select:focus{
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 1px;
+}
+
+input[type="radio"], input[type="checkbox"]{
+    accent-color: var(--gold);
+}
+
+button, input[type="submit"]{
+    font-family: var(--font-display);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--gold);
+    color: var(--leather-dark);
+    border: none;
+    padding: 10px 22px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+button:hover, input[type="submit"]:hover{
+    background: var(--gold-bright);
+}
+
+/* ---------- footer ---------- */
+
+footer{ text-align: center; padding-top: 14px; }
+footer p{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+}
+footer .name{ color: var(--gold-bright); }
+
+
+/* ============================================================
+   CLASS CHEAT-SHEET
+   ------------------------------------------------------------
+   .wrap            centered column        wrap your whole page
+   .book            bordered tome panel    wrap .wrap content for the book look
+   .kicker          small caps label       above a title
+   .divider         glyph row              decorative break
+   .byline          meta info row          author / date / etc
+   nav.toc          pill nav links         table of contents links
+   .panel / section bordered content block use for each page section
+   .pullquote       italic callout         quotes, notes
+   .lead-in         small caps label       above a list
+   ul.theme-list    glyph-bulleted list
+   table / th / td  already themed         just use normal <table> markup
+   form inputs      already themed         just use normal <input>, <label>, etc
+   ============================================================ */
