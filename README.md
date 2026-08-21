@@ -13,4 +13,4 @@ For these, first we need to use the link: (link href="https://fonts.googleapis.c
 
 ## Some Creations I had fun with:
 <img width="1920" height="918" alt="image" src="https://github.com/user-attachments/assets/065b4e71-199c-44a2-ada7-b0065a38a7ac" />
-<img width="1904" height="950" alt="image" src="https://github.com/user-attachments/assets/68bac465-16dc-4605-9d40-e2f2a3b51b2b" />
+
